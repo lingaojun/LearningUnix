@@ -1,38 +1,27 @@
 #include <stdio.h>
-#include <fcntl.h>
-#include <string.h>
-#include <unistd.h>
-const char *buf = "Hello World\n";
-char stream[1024];
+#include "string.h"
+
 int main(void)
 {
-    int fd;
-    if ((fd = open("test.txt", O_RDWR | O_CREAT, 0777)) < 0)
-    {
-        printf("open file error\n");
-        return -1;
-    }
-
-    if (write(fd, buf, strlen(buf)) != strlen(buf))
-    {
-		printf("write failed\n");
-        return -1;
-    }
-
-    if (write(fd, buf, strlen(buf)) != strlen(buf))
-    {
-		printf("write again failed\n");
-        return -1;
-    }
-
-	if (lseek(fd, 0, SEEK_SET) == -1)
-    {
-        printf("seek error\n");
-    }
-
-  	int size = read(fd, stream, sizeof(stream));
-
-    printf("size is %d\n the buffer is %s", size, stream);
-    close(fd);
+    FILE *fp;
+    char *str = "hello world";
+    int getc;
+    fp  = fopen("test.txt", "wb+");
+    printf("strlen is %d\n", strlen(str));
+    fwrite(str, sizeof(char), strlen(str), fp);
+    fseek(fp, 0, SEEK_END);
+    int lSize = ftell (fp);
+    printf("size is %d\n", lSize);
+    rewind(fp);
+    char *buffer = (char*)malloc(sizeof(char)*lSize);
+    int res = fread(buffer, sizeof(char), strlen(str), fp);
+    fseek(fp, 0, SEEK_SET);
+    getc = getc(fp);
+    printf("%c\n", getc);
+    getc = getc(fp); // µØÖ·Æ«ÒÆ
+    printf("%c\n", getc);
+    printf("buffer is %s\n", buffer);
+    fclose(fp);
+    free(buffer);
     return 0;
 }
