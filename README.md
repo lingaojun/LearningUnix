@@ -23,6 +23,13 @@ mkstemp是创建临时文件夹所用
 mkstemp入参不能是char* 因为需要对其进行修改，而char* 仅仅是将指针存入栈中，其内容是存入只读区，不能修改  
 所以应使用char[]  
 
+增加getenv以及putenv,setenv等知识
+getenv是获取目标环境变量的值   
+putenv和setenv的区别在于 putenv是修改之后仅在程序中生效，一旦程序结束，环境依旧原样。而setenv则会按照第三个形参是否为0来决定是否变成修改值。 
+函数签名：  
+int getenv(char* ch);
+int setenv(const char *name, const char *value, int rewrite); //若rewrite为0则去判断原变量是否有值，若有则不会重写；若为非0，则直接重写
+ 
 
 
 
