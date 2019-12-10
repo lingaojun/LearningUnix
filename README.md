@@ -34,7 +34,8 @@ int setenv(const char *name, const char *value, int rewrite); //若rewrite为0�
 增加setjmp，longjmp相关知识  
 setjmp是栈跳跃，类似于goto，但是优点在于goto只用于当前文件的跳转，而setjmp可用于多个文件间的跳转。  
 setjmp入参为jmp_buf变量，其类似于数组，返回值为跳转码flag。
-而longjmp的函数签名为 longjmp(jmp_buf buf, int flag)，可以修改其jmp_buf对应的跳转码flag，执行完这条语句后，会重新从setjmp所在的函数继续向下执行,但是其setjmp的返回值会变成longjmp设定的跳转吗，因此可以通过其多次检查setjmp的返回值即跳转码进行判定。
+而longjmp的函数签名为 longjmp(jmp_buf buf, int flag)，可以修改其jmp_buf对应的跳转码flag，执行完这条语句后，会重新从setjmp所在的函数继续向下执行,但是其setjmp的返回值会变成longjmp设定的跳转吗，因此可以通过其多次检查setjmp的返回值即跳转码进行判定。  
+关于**已修改的变量**是否也会回滚的问题，书中给出的结果是**不确定**，细节有点复杂，取决于**是否使用程序优化的方式 (-o)** ，本例不进行讨论。  
  
 
 
