@@ -50,6 +50,10 @@ vfork产生子进程后会等待子进程调用exit(0)或exec()完成后才调�
 ![Image text](https://github.com/lingaojun/LearningUnix/blob/master/fork/forktwice/1.png)  
 ![Image text](https://github.com/lingaojun/LearningUnix/blob/master/fork/forktwice/2.png)  
 
+增加exec函数族相关知识  
+exec函数族共有七种函数，概括的说exec可以通过路径作为入参运行其他程序，也可以为新启动程序提供argv[]和env相关变量。
+本例使用经典的execve的函数，与fork混合使用。  
+
 
 
 
