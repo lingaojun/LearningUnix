@@ -1,7 +1,7 @@
 #include "unistd.h"
 #include <stdio.h>
 
-int main(void)
+void test()
 {
 	pid_t pid;
 	int count = 0;
@@ -28,5 +28,6 @@ int main(void)
     }
 
     printf("end\n");
+
 
 }
