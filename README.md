@@ -65,6 +65,12 @@ exec函数族共有七种函数，概括的说exec可以通过路径作为入参
 增加sigsetjmp相关知识  
 sigsetjmp与setjmp的区别在于**在信号处理函数中，若使用setjmp对应的longjmp时，则会直接返回到setjmp所在的位置**,会导致原来被阻塞的信号不能被释放，二次触发该信号时会被再次阻塞。sigsetjmp则可以避免这个问题，sigsetjmp函数有两个接口，第二个接口若为非0的话，会保存信号屏蔽字，那么在调用siglongjmp时，若已经保存了信号屏蔽字的话，会从其中恢复保存的信号屏蔽字。  
 
+增加sigemptyset sigaddset sigprocmask sigsuspend相关知识
+sigemptyset 类似于信号集初始化
+sigaddset 将目标信号加入目标信号集
+sigprocmask 根据不同的参数对两个信号集进行处理
+sigsuspend 挂起进程目标信号出现，该信号必须在目标信号集中不存在，**比如说sigsuspend(&sigmask)中的sigmask信号集若存在SIGQUIT信号时，当执行到sigsuspend时阻塞住，若触发了SIGQUIT信号则不会有反应，但是其他信号都会有反应**，这是这个函数的特性。  
+
 
 
 
