@@ -82,6 +82,11 @@ get_pid()和pthread_self()区别 get_pid是获取进程id，在同一个进程�
 pthread_exit类似于return,只不过只用于线程函数中使用。  
 pthread_join会阻塞当前线程直至指定的线程调用pthread_exit或从函数中取消或者返回，另外可以得到指定线程返回值。  
 
+增加pthread_cleanup_push、pthread_cleanup_pop相关知识  
+pthread_cleanup_push作用是添加(机制类似于栈添加)线程清理函数可用于线程退出时调用。**且必须是通过pthread_exit（）退出**，若通过return退出时是不会调用的。 
+pthread_cleanup_pop的作用通过参数来觉得是否调用线程清理函数，**若入参为0时则会不执行线程清理函数，但不论是否为0，都会删除上一次添加的线程清理函数。**  
+
+
 
 
 
