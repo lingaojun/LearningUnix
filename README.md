@@ -69,7 +69,13 @@ sigsetjmp与setjmp的区别在于**在信号处理函数中，若使用setjmp对
 **sigemptyset** 类似于信号集初始化    
 **sigaddset** 将目标信号加入目标信号集  
 **sigprocmask** 根据不同的参数对两个信号集进行处理  
-**sigsuspend** 挂起进程目标信号出现，该信号必须在目标信号集中不存在，**比如说sigsuspend(&sigmask)中的sigmask信号集若存在SIGQUIT信号时，当执行到sigsuspend时阻塞住，若触发了SIGQUIT信号则不会有反应，但是其他信号都会有反应**，这是这个函数的特性。代码中信号集变量为newmask,该信号集无任何信号，所以任何信号都会被触发信号处理函数。
+**sigsuspend** 挂起进程目标信号出现，该信号必须在目标信号集中不存在，**比如说sigsuspend(&sigmask)中的sigmask信号集若存在SIGQUIT信号时，当执行到sigsuspend时阻塞住，若触发了SIGQUIT信号则不会有反应，但是其他信号都会有反应**，这是这个函数的特性。代码中信号集变量为newmask,该信号集无任何信号，所以任何信号都会被触发信号处理函数。  
+
+## 1.7  
+2020快乐！！  
+增加pthread_create相关知识  
+int pthread_create(pthread_t *tidp, const pthread_attr_t *attr, (void*)(*start_rtn)(void*), void *arg)  
+
 
 
 
