@@ -78,6 +78,10 @@ int pthread_create(pthread_t *tidp, const pthread_attr_t *attr, (void*)(*start_r
 第一个参数表示pid特征值，第二个参数表示线程熟悉，第三个参数表示线程函数的头地址，第四个参数表示线程函数的参数。  
 get_pid()和pthread_self()区别 get_pid是获取进程id，在同一个进程中的不同线程他们的同一时刻的进程id相同，但是在不同时刻运行程序时的进程id不同。pthread_self是获取线程id，不同线程的id不同  
 
+增加pthread_exit、pthread_join相关知识  
+pthread_exit类似于return,只不过只用于线程函数中使用。  
+pthread_join会阻塞当前线程直至指定的线程调用pthread_exit或从函数中取消或者返回，另外可以得到指定线程返回值。  
+
 
 
 
