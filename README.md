@@ -75,6 +75,8 @@ sigsetjmp与setjmp的区别在于**在信号处理函数中，若使用setjmp对
 2020快乐！！  
 增加pthread_create相关知识  
 int pthread_create(pthread_t *tidp, const pthread_attr_t *attr, (void*)(*start_rtn)(void*), void *arg)  
+第一个参数表示pid特征值，第二个参数表示线程熟悉，第三个参数表示线程函数的头地址，第四个参数表示线程函数的参数。  
+get_pid()和pthread_self()区别 get_pid是获取进程id，在同一个进程中的不同线程他们的同一时刻的进程id相同，但是在不同时刻运行程序时的进程id不同  
 
 
 
