@@ -86,7 +86,11 @@ pthread_join会阻塞当前线程直至指定的线程调用pthread_exit或从�
 pthread_cleanup_push作用是添加(机制类似于栈添加)线程清理函数可用于线程退出时调用。**且必须是通过pthread_exit（）退出**，若通过return退出时是不会调用的。  
 pthread_cleanup_pop的作用通过参数来觉得是否调用线程清理函数，**若入参为0时则会不执行线程清理函数，但不论是否为0，都会删除上一次添加的线程清理函数。**  
 
-
+## 1.8  
+增加pthread_mutex相关知识
+pthread_mutex_init(),第一个入参是mutex的地址，第二个入参是mutex初始化属性，可用NULL表示默认。实际上在mutex声明时可定义为**pthread_mutex mutex = PTHREAD_MUTEX_INITIALIZER**也可代表初始化。  
+pthread_mutex_lock()，获取mutex并上锁，当该mutex上锁时，其他线程调用pthread_mutex_lock时会被阻塞。**单个线程两次上锁会产生死锁！**
+pthread_mutex_trylock（），如果线程不希望被阻塞，它可以使用该函数对mutex进行加锁。**如果mutex此时为未锁住状态，则当前线程会锁住mutex，不会出现阻塞并返回0，否则该函数会失败，返回EBUSY。**
 
 
 
