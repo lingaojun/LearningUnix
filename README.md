@@ -92,7 +92,11 @@ pthread_mutex_init(),第一个入参是mutex的地址，第二个入参是mutex�
 pthread_mutex_lock()，获取mutex并上锁，当该mutex上锁时，其他线程调用pthread_mutex_lock时会被阻塞。**单个线程两次上锁会产生死锁！**  
 pthread_mutex_trylock（），如果线程不希望被阻塞，它可以使用该函数对mutex进行加锁。**如果mutex此时为未锁住状态，则当前线程会锁住mutex，不会出现阻塞并返回0，否则该函数会失败，返回EBUSY(16?)。** **单个线程两次trylock不会产生死锁，但是会返回EBUSY (16)**  
 pthread_mutex_unlock（）,对mutex解锁。  
-pthread_mutex_timedlock（）,通过设定阻塞时间来避免永久阻塞，当超过该时间后会继续向后执行，不推荐使用，可能会发生死锁现象而且时间控制不稳定。
+pthread_mutex_timedlock（）,通过设定阻塞时间来避免永久阻塞，当超过该时间后会继续向后执行，不推荐使用，可能会发生死锁现象而且时间控制不稳定。  
+
+## 1.11  
+增加pthread_cond_wait和pthread_cond_signal相关知识  
+pthrad_cond_wait() **当线程运行到这条语句时会自动对mutex解锁，并阻塞该线程**，直到收到其他线程的pthread_cond_signal()信号或pthread_cond_broadcast()才被唤醒,当**pthread_cond_wait（）返回时，mutex会被再次锁住**
 
 
 
