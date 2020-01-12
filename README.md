@@ -1,6 +1,6 @@
 # LearningUnix
 
-## 12.1
+## 2019.12.1
 增加fork()函数，可以新建一个相同的进程，子进程的进程号为0。  
 
 ## 12.7  
@@ -71,7 +71,7 @@ sigsetjmp与setjmp的区别在于**在信号处理函数中，若使用setjmp对
 **sigprocmask** 根据不同的参数对两个信号集进行处理  
 **sigsuspend** 挂起进程目标信号出现，该信号必须在目标信号集中不存在，**比如说sigsuspend(&sigmask)中的sigmask信号集若存在SIGQUIT信号时，当执行到sigsuspend时阻塞住，若触发了SIGQUIT信号则不会有反应，但是其他信号都会有反应**，这是这个函数的特性。代码中信号集变量为newmask,该信号集无任何信号，所以任何信号都会被触发信号处理函数。  
 
-## 1.7  
+## 2020.1.7  
 2020快乐！！  
 增加pthread_create相关知识  
 int pthread_create(pthread_t *tidp, const pthread_attr_t *attr, (void*)(*start_rtn)(void*), void *arg)  
@@ -96,7 +96,16 @@ pthread_mutex_timedlock（）,通过设定阻塞时间来避免永久阻塞，�
 
 ## 1.11  
 增加pthread_cond_wait和pthread_cond_signal相关知识  
-pthrad_cond_wait() **当线程运行到这条语句时会自动对mutex解锁，并阻塞该线程**，直到收到其他线程的pthread_cond_signal()信号或pthread_cond_broadcast()才被唤醒,当**pthread_cond_wait（）返回时，mutex会被再次锁住**
+pthrad_cond_wait() **当线程运行到这条语句时会自动对mutex解锁，并阻塞该线程**，直到收到其他线程的pthread_cond_signal()信号或pthread_cond_broadcast()才被唤醒,当**pthread_cond_wait（）返回时，mutex会被再次锁住**  
+
+## 1.13  
+增加pthread_barrier_wait和thread_barrier_init/thread_barrier_destroy相关知识  
+首先理解需求：在某些场景下，需要多个线程同时运行，而不是需要在create时运行，此时每个线程都像是运动员，需要有发令枪响来告诉他们开始比赛。  
+线程中的发令枪就是barrier(栏杆)。  
+pthread_barrier_init()，第一个参数是pthread_barrier_t 为特性的变量，第二个是barrier变量的属性(NULL表示默认属性), 第三个参数是线程数量，即当内部计数器达到目标线程数量时，即会立即告诉线程开始同一运行。  
+pthread_barrier_wait(),唯一参数是特性变量的地址。 **当线程内运行到这句函数时表明该线程已被阻塞,等待同一运行，且计数加1。**  
+pthread_barrier_destroy(),反初始化，用于所有线程结束后。  
+线程数量的取值：**所有线程+1**。理由：大部分情况下需要在主函数的同一规划下一起运行，又因为init中的计数是又运行的wait次数决定，**所以若目标计数 = 所有线程数量 +主线程数量(1)时，然后在主线程中再次调用wait函数，则可以起到一起运行所有线程的目标。**  
 
 
 
