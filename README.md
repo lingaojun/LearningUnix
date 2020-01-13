@@ -115,7 +115,7 @@ pthread_attr_init()初始化线程属性变量，把属性设置为默认值
 pthread_attr_setdetachstate() 第一个参数是线程属性变量地址，第二个是线程某个宏，例如:PTHREAD_CREATE_DETACHED   
 pthread_attr_destroy() 反初始化线程属性  
 线程分离与线程可结合的区别： 线程可结合(pthread_join)表示一个可结合的线程是**可以被其他进程回收资源或者杀死的**，在其他线程被回收之前，他的存储器资源（如栈）是不会被回收的。  
-线程分离(pthread_detach)是指当前线程不受其他线程控制,当自身线程结束时，**会自己释放所占用的资源**。
+线程分离(pthread_detach)是指当前线程不受其他线程控制,当自身线程结束时，**会自己释放所占用的资源**。  
 
 
 
