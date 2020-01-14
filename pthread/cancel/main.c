@@ -10,6 +10,7 @@ void pthread_fun1(char *ch)
 	while(1)
     {
         //printf("Now The Thread1 Is Running\n");
+        pthread_testcancel();
     }
 
     pthread_exit((void *)1);
