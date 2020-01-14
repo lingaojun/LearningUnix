@@ -7,11 +7,14 @@ pthread_t tid2;
 void pthread_fun1(char *ch)
 {
 	printf("%s", ch);
-	while(1)
+    long long int  flag = 0;
+	while(!(flag == 1000000000))
     {
         //printf("Now The Thread1 Is Running\n");
-        pthread_testcancel();
+        flag++;
     }
+    //测试testcancel的机制，发现是收到线程取消信号后再次调用系统接口才会被取消。
+    pthread_testcancel();
 
     pthread_exit((void *)1);
 }
@@ -20,7 +23,7 @@ void pthread_fun2(char *ch)
 {
 	printf("%s", ch);
     int a = 0;
-	while(!(a == 3))
+	while(!(a == 1))
     {
 		sleep(1);
         a++;
